@@ -19,7 +19,7 @@ function App() {
             <Route path='/' element={<Layout />}>
               <Route path="productos/*" >
                 <Route index element={<Productos />}  />
-                <Route path="Inventario/" element={<Entradas />} />
+                <Route path="Entradas/" element={<Entradas />} />
                 <Route path="Ventas/" element={<Venta />} />
               </Route>
               {/* <Route path="/proveedores" exact element={<Proveedores />} /> */}

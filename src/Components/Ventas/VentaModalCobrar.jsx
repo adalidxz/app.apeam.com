@@ -33,25 +33,30 @@ export default function VentaModalCobrar({productos, close, vaciar}) {
     
     return (
         <Modal open={true} title="Ventana de Cobro" submitfn={enviarCompra} mClose={close} >
-            <Grid container direction={"row"} spacing={3}>
-                <Grid item xs={12} justifyContent="center">
-                    <Typography>Total a Pagar {total}</Typography>
+            <Grid container direction={"row"} spacing={3} >
+                <Grid item xs={12} container justifyItems="center" justifyContent={"center"}>
+                    <Typography sx={{fontSize: 24, color: 'green' }}><b>Total a Pagar {total}</b></Typography>
                 </Grid>
-                <Grid item xs={6} justifyContent="center">
-                    <Typography>Efectivo recibido</Typography>
+                <Grid item xs={12} container justifyItems="center" justifyContent={"center"}>
+                    <Typography><b>Efectivo recibido</b></Typography>
+                </Grid>
+                <Grid item xs={12} container justifyItems="center" justifyContent={"center"}>
                     <TextField
-                    fullWidth
+                    inputProps={{style:{textAlign:'center', fontWeight:800}}}
                     name='efectivo'
                     required
                     value={efectivo}
                     onChange={(e)=>{setEfectivo(e.target.value)}}/>
                 </Grid>
-                <Grid item xs={12} justifyContent="center">
+                <Grid item xs={12} container justifyItems="center" justifyContent={"center"}>
                     <Typography>Cambio</Typography>
+                </Grid>
+                <Grid item xs={12} container justifyItems="center" justifyContent={"center"}>
                     <Typography>
-                        {((efectivo - total) < 0 ? (0).toFixed(2) :(efectivo - total).toFixed(2))}
+                        {((efectivo - total) < 0 ? (0).toFixed(2) : (efectivo - total).toFixed(2))}
                     </Typography>
                 </Grid>
+                
             </Grid>
         </Modal>
     )

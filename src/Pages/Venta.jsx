@@ -87,7 +87,7 @@ export default function Productos() {
                                         </Button>
                                     </Grid>
                                     <Grid item xs={6} container direction={"row-reverse"}>
-                                        <Button sx={{ mx: 1 }} color="secondary" variant="contained" size="small" startIcon={<AddCircleOutline />} onClick={generarCompra}>
+                                        <Button sx={{ mx: 1 }} disabled={(productos.length > 0 ? false : true)} color="secondary" variant="contained" size="small" startIcon={<AddCircleOutline />} onClick={generarCompra}>
                                             COBRAR
                                         </Button>
                                     </Grid>

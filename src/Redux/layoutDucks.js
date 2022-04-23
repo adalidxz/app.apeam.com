@@ -4,7 +4,7 @@ const { REACT_APP_BACKEND } = process.env;
 const dataInicial = {
     menu: [
         { Icon: "inventory_2", Title: "Productos", Orden: 1, Path: "Productos" },
-        { Icon: "fact_check", Title: "Entrada/Salidas", Orden: 1, Path: "Productos/Inventario" },
+        { Icon: "fact_check", Title: "Entrada/Salidas", Orden: 1, Path: "Productos/Entradas" },
         { Icon: "shopping_cart", Title: "Ventas", Orden: 1, Path: "Productos/Ventas" },
         { Icon: "local_shipping", Title: "Proveedores", Orden: 1, Path: "Proveedores" },
 

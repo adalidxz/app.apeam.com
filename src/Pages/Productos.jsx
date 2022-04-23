@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Box, Button, Grid, Typography } from "@mui/material"
+import { Box, Button, Container, Grid, Typography } from "@mui/material"
 import { grey } from '@mui/material/colors'
 import ProductosTabla from '../Components/Productos/ProductosTabla'
 import { AddCircleOutline } from '@mui/icons-material'
@@ -12,13 +12,13 @@ export default function Productos() {
     }
 
   return (
-      <>
+      <Container maxWidth={"xl"}>
           <Box sx={{ background: "#233044", width: "100vw", zIndex: -1, left: 0, top: 50, height: 250, position: "fixed", color: grey[200] }} />
           <div>
               <Grid container direction="row" alignItems="center" alignContent="center" sx={{ paddingY: 5, color: grey[200] }}>
                   <Grid item>
                       <Typography sx={{ color: grey[200], fontSize: 24 }}>
-                          Productos
+                          Productos 
                       </Typography>
                   </Grid>
               </Grid>
@@ -50,6 +50,6 @@ export default function Productos() {
             {
                 (openModalAdd  ? <ProductosModalAdd close={()=>{setOpenModalAdd(false)}}/> : null )
             }
-      </>
+      </Container>
   )
 }

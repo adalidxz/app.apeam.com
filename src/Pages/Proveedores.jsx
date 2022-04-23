@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Typography } from "@mui/material"
+import { Box, Button, Container, Grid, Typography } from "@mui/material"
 import { grey } from '@mui/material/colors'
 
 import { AddCircleOutline } from '@mui/icons-material'
@@ -9,7 +9,8 @@ import ProveedoresModalAdd from "../Components/Proveedores/ProveedoresModalAdd"
 export default function Proveedores() {
     const [openModalAdd, setOpenModalAdd] = useState(false)
 
-    return (<>
+    return (
+    <Container maxWidth={"xl"}>
         <Box sx={{ background: "#233044", width: "100vw", zIndex: -1, left: 0, top: 50, height: 250, position: "fixed", color: grey[200] }} />
         <div>
             <Grid container direction="row" alignItems="center" alignContent="center" sx={{ paddingY: 5, color: grey[200] }}>
@@ -47,6 +48,6 @@ export default function Proveedores() {
         {
             (openModalAdd ? <ProveedoresModalAdd close={() => { setOpenModalAdd(false) }} /> : null)
         }
-    </>
+    </Container>
   )
 }
