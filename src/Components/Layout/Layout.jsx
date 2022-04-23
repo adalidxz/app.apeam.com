@@ -217,7 +217,7 @@ export default function Layout() {
                                     {componentUser()}
                                 </MenuItem>
                                 <Divider></Divider>
-                                <MenuItem onClick={_singOut}>LogOut</MenuItem>
+                                <MenuItem disabled onClick={_singOut}>LogOut</MenuItem>
                             </Menu>
                         </div>
                     </Grid>

@@ -3,7 +3,7 @@ import { setMenuFromLogin } from "./layoutDucks";
 // constantes
 const { REACT_APP_BACKEND } = process.env;
 const dataInicial={
-    usuario: (localStorage.getItem("usuario") ? JSON.parse(localStorage.getItem("usuario")): {}),
+    usuario: {Nombre:"Adalid campos Hernandez", Puesto: "Ing. Sistemas", Correo: "adalid.xz@gmail.com"},
     token: localStorage.getItem("token") || null,
     sigin: {},
     logged: false,
