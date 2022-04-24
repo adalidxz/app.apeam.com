@@ -35,7 +35,24 @@ export default function layoutReducer(state = dataInicial, action) {
 //         }
 //     }
 // }
-
+export const deleteProducto = (params) => async (dispatch, getState) => {
+    try {
+        const { data } = await axios.delete(`${REACT_APP_BACKEND}/productos/remove/${params}`);
+        return data.state;
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+}
+export const updateProducto = (params) => async (dispatch, getState) => {
+    try {
+        const { data } = await axios.put(`${REACT_APP_BACKEND}/productos/update`, params);
+        return data.state;
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+}
 export const generarCompra = (params) => async (dispatch, getState) => {
     try {
         const { data } = await axios.post(`${REACT_APP_BACKEND}/productos/venta/save`, params);

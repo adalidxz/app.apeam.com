@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import { Chip, Grid, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Typography } from "@mui/material"
-import { blue, cyan, green, grey, orange, red } from '@mui/material/colors';
+import { Grid, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Typography } from "@mui/material"
+import { grey } from '@mui/material/colors';
 import { useDispatch, useSelector } from 'react-redux';
 import { Delete, Edit, North, South } from '@mui/icons-material';
-import moment from 'moment';
 import { getProducts } from '../../Redux/productosDucks';
-
+import ProductosModalUpdate from './ProductosModalUpdate';
+import ProductosModalDelete from './ProductosModalDelete';
 
 export default function ProductosTabla({ searching }) {
     const dispatch = useDispatch();
     const [page, setPage] = useState(0)
-    const [sortSelect, setSortSelect] = useState({ column: "idJob", order: true });
+    const [openModalEditProducto, setOpenModalEditProducto] = useState(null)
+    const [openModalDeleteProducto, setOpenModalDeleteProducto] = useState(null)
+    const [sortSelect, setSortSelect] = useState({ column: "idProducto", order: true });
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [rowsFilter, setRowsFilter] = useState([]);
     const { productos } = useSelector(state => state.productos);
@@ -89,21 +91,6 @@ export default function ProductosTabla({ searching }) {
         setRowsFilter(temp);
     }, [sortSelect, productos, searching])
 
-    const getChipLabel = (idPrioridad, Prioridad) => {
-        const colorsSX = [green[500], orange[500], red[500]];
-        return <Chip size='small' sx={{ color: colorsSX[idPrioridad - 1], borderColor: colorsSX[idPrioridad - 1], paddingX: 2 }} label={Prioridad} variant="outlined" />
-    }
-
-    const getStatus = (info) => {
-
-        const colorsSX = [grey[500], cyan[300], blue[400], green[800], red[400]];
-        const labels = ["Solicitud Envida", "Aceptado/Asignado", "Completado/Revisión", "Completado/Finalizado"];
-        const state = (info.FirmaSolicitante !== null ? 3 : (info.FirmaResponsable !== null ? 2 : (info.idResponsableOT !== null ? 1 : 0)));
-
-        return <Chip size='small' sx={{ color: grey[50], background: colorsSX[state], padding: 0, fontSize: 12 }} label={labels[state]} variant="filled" />
-    }
-
-
     const columns = [
         { id: 'idProducto', label: labelHeader('id'), minWidth: 100 },
         { id: 'Producto', label: labelHeader('Producto'), minWidth: 150 },
@@ -113,11 +100,11 @@ export default function ProductosTabla({ searching }) {
         { id: 'Stock', label: 'Stock', minWidth: 170, },
         { id: 'Options', label: 'Options', minWidth: 170, align: 'right', },
     ];
-    const getButtonsOptions = (idOT) => {
-        return (<><IconButton aria-label="delete" size="small" onClick={() => { alert("Editar producto") }}>
+    const getButtonsOptions = (idProducto) => {
+        return (<><IconButton aria-label="delete" size="small" onClick={() => { setOpenModalEditProducto(idProducto) }}>
             <Edit fontSize="inherit" />
         </IconButton>
-        <IconButton aria-label="delete" size="small" onClick={() => { alert("Eliminar producto") }}>
+            <IconButton aria-label="delete" size="small" onClick={() => { setOpenModalDeleteProducto(idProducto) }}>
             <Delete fontSize="inherit" />
             </IconButton></>)
     }
@@ -150,7 +137,7 @@ export default function ProductosTabla({ searching }) {
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(e => {
                                     return {
                                         ...e,
-                                        Options: getButtonsOptions(e.idOT),
+                                        Options: getButtonsOptions(e.idProducto),
                                         Costo: dollarUS.format(e.Costo),
                                         Stock: e.Stock || 0
                                     }
@@ -190,6 +177,13 @@ export default function ProductosTabla({ searching }) {
                     onRowsPerPageChange={handleChangeRowsPerPage}
                 />
             </Paper>
+            {
+                openModalEditProducto && <ProductosModalUpdate id={openModalEditProducto} producto={productos.find(e => e.idProducto === openModalEditProducto)} close={()=>{setOpenModalEditProducto(null)}} />
+            }
+
+            {
+                openModalDeleteProducto && <ProductosModalDelete id={openModalDeleteProducto} close={() => { setOpenModalDeleteProducto(null) }} />
+            }
         </div>
     )
 }
